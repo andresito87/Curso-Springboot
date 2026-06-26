@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style-list.css">
+    <title>Lista de Proyectos</title>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div th:insert="~{fragments/navbar :: navbar}"></div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <section class="admin-section">
+            <h2>Proyectos guardados</h2>
+            <a th:href="@{/projects/new}">Nuevo Proyecto</a>
+            <table class="admin-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>URL del proyecto</th>
+                    <th>Imagen del proyecto</th>
+                    <th>ID Información Personal</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="project : ${projects}">
+                    <td th:text="${project.id}"></td>
+                    <td th:text="${project.title}"></td>
+                    <td th:text="${project.description}"></td>
+                    <td><a th:href="${project.projectUrl}" th:text="${project.projectUrl}"></a></td>
+                    <td><img th:src="@{${project.imageUrl}}" alt="Imagen del proyecto" width="100"></td>
+                    <td th:text="${project.personalInfoId}"></td>
+                    <td>
+                        <a th:href="@{/projects/edit/{id}(id=${project.id})}">Editar</a> |
+                        <a th:href="@{/projects/delete/{id}(id=${project.id})}"
+                           onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');">Eliminar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</main>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

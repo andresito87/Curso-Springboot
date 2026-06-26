@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skills</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+</head>
+<body>
+
+    <h1>Agregar nueva habilidad:</h1>
+    <form th:action="@{/skills/add}" th:object="${skill}" method="post">
+        <label th:for="nombre">
+            Nombre
+            <input type="text" th:field="*{name}"/>
+        </label>
+        <label th:for="nivel">
+            Nivel
+            <input type="text" th:field="*{level}"/>
+        </label>
+        <button type="submit">Guardar</button>
+    </form>
+
+</body>
+</html>

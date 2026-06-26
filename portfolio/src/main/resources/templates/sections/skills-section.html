@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habilidades</title>
+</head>
+<body>
+<section id="skills" th:fragment="skills">
+    <h2 class="section-header">Mis habilidades</h2>
+    <div class="skills-grid">
+        <div class="skill-card" th:each="skill : ${skillsList}">
+            <img th:src="${skill.iconClass}" th:alt="${skill.name}">
+            <h3 th:text="${skill.name}">Habilidad</h3>
+        </div>
+    </div>
+</section>
+</body>
+</html>

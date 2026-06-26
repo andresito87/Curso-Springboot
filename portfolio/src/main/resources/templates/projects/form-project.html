@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style-form-project.css">
+    <title>Formulario de Proyecto</title>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div th:insert="~{fragments/navbar :: navbar}"></div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <section id="contact">
+            <h2>Formulario de Proyecto</h2>
+
+            <form
+                    class="contact-form"
+                    method="POST"
+                    th:action="@{/projects/save}"
+                    th:object="${projectDto}"
+                    enctype="multipart/form-data"
+            >
+
+                <input type="text" placeholder="Título" th:field="*{title}">
+                <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></div>
+
+                <textarea placeholder="Descripción" th:field="*{description}" rows="6"></textarea>
+                <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error-message"></div>
+
+                <input type="url" placeholder="URL del proyecto" th:field="*{projectUrl}">
+                <div th:if="${#fields.hasErrors('projectUrl')}" th:errors="*{projectUrl}" class="error-message"></div>
+
+                <div>
+                    <label for="file">Imagen del proyecto:
+                        <input type="file" name="file" id="file">
+                    </label>
+                </div>
+                <div th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="error-message"></div>
+
+                <input type="number" placeholder="ID Información Personal" th:field="*{personalInfoId}">
+                <div th:if="${#fields.hasErrors('personalInfoId')}" th:errors="*{personalInfoId}"
+                     class="error-message"></div>
+
+                <button type="submit">Guardar Proyecto</button>
+            </form>
+        </section>
+    </div>
+</main>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

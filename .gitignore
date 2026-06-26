@@ -1,0 +1,32 @@
+### IntelliJ IDEA / VS Code ###
+.idea/
+.vscode/
+*.iml
+
+### Maven / Gradle ###
+target/
+build/
+out/
+.gradle/
+
+### Spring Boot / Logs ###
+*.log
+logs/
+
+### OS files ###
+.DS_Store
+Thumbs.db
+
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+
+### Backup / temp ###
+*.tmp
+*.swp
+*.swo
+*~
+.idea
+    

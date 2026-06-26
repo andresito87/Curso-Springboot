@@ -1,0 +1,40 @@
+package dev.andrescoder.portfoliobackend.service;
+
+import dev.andrescoder.portfoliobackend.exception.ValidationException;
+import dev.andrescoder.portfoliobackend.model.Skill;
+import dev.andrescoder.portfoliobackend.repository.ISkillRepository;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+@SpringBootTest
+// Reinicia el estado de la BD antes de cada test
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+public class SkillServiceTest {
+    @Autowired
+    private ISkillService skillService;
+    @Autowired
+    private ISkillRepository skillRepository;
+
+    @Test
+    void testSaveValidSkill() {
+        Skill skill = new Skill(null, "Java", 90, "fab fa-java", 1L);
+        Skill savedSkill = skillService.save(skill);
+
+        assertNotNull(savedSkill.getId(), "Saved skill must have an ID");
+        assertNotNull(skillRepository.findById(savedSkill.getId()).orElse(null), "Saved skill must exist in the DB");
+    }
+
+    @Test
+    void testSaveInvalidSkill() {
+        Skill invalidSkill = new Skill(null, "", 90, "fab fa-java", 1L);
+
+        assertThrows(ValidationException.class, () -> {
+            skillService.save(invalidSkill);
+        }, "Saving a skill with an empty name should throw an exception");
+    }
+}

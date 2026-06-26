@@ -1,0 +1,16 @@
+input[type="file"]::file-selector-button {
+    background-color: var(--color-primary-gold);
+    color: var(--color-dark);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--color-dark);
+    color: var(--color-primary-gold);
+}

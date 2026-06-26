@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Info</title>
+</head>
+<body>
+<div class="hero-section" th:fragment="hero" th:each="personalInfo : ${personalInfo}">
+    <h1>I'm <span th:text="${personalInfo.firstName} + ' ' + ${personalInfo.lastName}"></span></h1>
+    <h1 th:text="${personalInfo.title}"></h1>
+    <div class="profile-image-container">
+        <img th:src="${personalInfo.profileImageUrl}" th:alt="${personalInfo.firstName} + 'Profile Picture'"
+             class="profile-picture">
+    </div>
+    <p th:text="${personalInfo.profileDescription}"></p>
+    <a href="#projects">
+        <button>Mis proyectos</button>
+    </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
+    <title>Skills</title>
+</head>
+<body>
+
+    <h1>Nuestras Habilidades:</h1>
+    <p th:if="${skills.isEmpty()}">No hay datos</p>
+    <ul th:if="${!skills.isEmpty()}">
+        <li th:each="skill, stat : ${skills}">
+            <span th:text="'Habilidad: ' + ${skill.name} + ' --- Nivel: ' + ${skill.level}"></span>
+            <a th:href="@{'/skills/id/' + ${stat.index}}">Ver detalle</a>
+        </li>
+    </ul>
+
+    <p th:if="${filterMessage}" th:text="${filterMessage}"></p>
+
+    <form action="/skills" method="get">
+        <label th:for="nombre">
+            Buscar
+            <input type="text" th:value="${filter}" name="filter"/>
+        </label>
+        <button type="submit">Buscar</button>
+    </form>
+
+</body>
+</html>

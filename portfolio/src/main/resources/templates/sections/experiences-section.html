@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiencia</title>
+</head>
+<body>
+
+<section id="experience" th:fragment="experiences">
+    <h2>Mi experiencia</h2>
+    <div class="experience-timeline">
+        <div class="timeline-item" th:each="experience : ${experiencesList}">
+            <h3 th:text="${experience.jobTitle} + ' - ' + ${experience.companyName}"></h3>
+            <p class="timeline-date" th:text="${experience.startDate} + ' / ' + ${experience.endDate}"></p>
+            <p th:text="${experience.description}"></p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
