@@ -6,17 +6,16 @@
     <title>Experiencia</title>
 </head>
 <body>
-
-<section id="experience" th:fragment="experiences">
-    <h2>Mi experiencia</h2>
-    <div class="experience-timeline">
+<section id="experience" th:fragment="experiences" class="content-section">
+    <h2 class="section-title">Mi experiencia</h2>
+    <div class="experience-timeline timeline-grid">
         <div class="timeline-item" th:each="experience : ${experiencesList}">
             <h3 th:text="${experience.jobTitle} + ' - ' + ${experience.companyName}"></h3>
-            <p class="timeline-date" th:text="${experience.startDate} + ' / ' + ${experience.endDate}"></p>
+            <p class="timeline-date"
+               th:text="${experience.startDate} + ' / ' + ${experience.endDate == null ? 'Actualidad' : experience.endDate}"></p>
             <p th:text="${experience.description}"></p>
         </div>
     </div>
 </section>
-
 </body>
 </html>

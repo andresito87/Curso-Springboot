@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/logos/springboot.png">
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/style.css">
     <title>Portfolio - Home</title>
 </head>
-<body>
-<div th:insert="~{fragments/header :: header}"></div>
-<main>
-    <div class="container">
-        <div th:insert="~{fragments/about :: about}" class="line-white"></div>
-        <div th:insert="~{sections/educations-section :: educations}" class="line-white"></div>
-        <div th:insert="~{sections/skills-section :: skills}" class="line-white"></div>
-        <div th:insert="~{sections/experiences-section :: experiences}" class="line-white"></div>
-        <div th:insert="~{sections/projects-section :: projects}" class="line-white"></div>
+<body class="portfolio-page">
+<th:block th:replace="~{fragments/header :: header}"></th:block>
 
-        <div th:insert="~{sections/contact-section :: contact}"></div>
+<main class="portfolio-main">
+    <div class="container page-shell">
+        <th:block th:replace="~{fragments/about :: about}"></th:block>
+        <th:block th:replace="~{sections/educations-section :: educations}"></th:block>
+        <th:block th:replace="~{sections/skills-section :: skills}"></th:block>
+        <th:block th:replace="~{sections/experiences-section :: experiences}"></th:block>
+        <th:block th:replace="~{sections/projects-section :: projects}"></th:block>
+        <th:block th:replace="~{sections/contact-section :: contact}"></th:block>
     </div>
 </main>
-<div th:insert="~{fragments/footer :: footer}"></div>
+
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>

@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/skills")
 @RequiredArgsConstructor
-public class SkillController {
+public class SkillPageController {
 
     private final ISkillService skillService;
 

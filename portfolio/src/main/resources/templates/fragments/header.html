@@ -7,10 +7,10 @@
 </head>
 <body>
 
-<header th:fragment="header" class="line-white">
+<header th:fragment="header" class="site-header">
     <div class="header-container">
-        <div th:insert="~{fragments/navbar :: navbar}"></div>
-        <div th:insert="~{sections/personal-info-section :: hero}"></div>
+        <th:block th:replace="~{fragments/navbar :: navbar}"></th:block>
+        <th:block th:replace="~{sections/personal-info-section :: hero}"></th:block>
     </div>
 </header>
 

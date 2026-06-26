@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/logos/springboot.png">
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/style-form-project.css">
     <title>Formulario de Proyecto</title>
 </head>
-<body>
-<header>
-    <div class="container">
-        <div th:insert="~{fragments/navbar :: navbar}"></div>
+<body class="portfolio-page">
+<header class="site-header">
+    <div class="header-container">
+        <th:block th:replace="~{fragments/navbar :: navbar}"></th:block>
     </div>
 </header>
 
-<main>
-    <div class="container">
-        <section id="contact">
-            <h2>Formulario de Proyecto</h2>
+<main class="portfolio-main">
+    <div class="container page-shell">
+        <section id="contact" class="content-section contact-section">
+            <h2 class="section-title">Formulario de Proyecto</h2>
 
             <form
-                    class="contact-form"
+                    class="contact-form project-form"
                     method="POST"
                     th:action="@{/projects/save}"
                     th:object="${projectDto}"
@@ -37,7 +38,7 @@
                 <input type="url" placeholder="URL del proyecto" th:field="*{projectUrl}">
                 <div th:if="${#fields.hasErrors('projectUrl')}" th:errors="*{projectUrl}" class="error-message"></div>
 
-                <div>
+                <div class="file-field">
                     <label for="file">Imagen del proyecto:
                         <input type="file" name="file" id="file">
                     </label>
@@ -54,7 +55,6 @@
     </div>
 </main>
 
-<div th:insert="~{fragments/footer :: footer}"></div>
-
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>

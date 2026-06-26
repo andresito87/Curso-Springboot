@@ -7,16 +7,18 @@
 </head>
 <body>
 <div class="hero-section" th:fragment="hero" th:each="personalInfo : ${personalInfo}">
-    <h1>I'm <span th:text="${personalInfo.firstName} + ' ' + ${personalInfo.lastName}"></span></h1>
-    <h1 th:text="${personalInfo.title}"></h1>
-    <div class="profile-image-container">
-        <img th:src="${personalInfo.profileImageUrl}" th:alt="${personalInfo.firstName} + 'Profile Picture'"
-             class="profile-picture">
+    <div class="hero-copy">
+        <h1>I'm <span th:text="|${personalInfo.firstName} ${personalInfo.lastName}|"></span></h1>
+        <h1 th:text="${personalInfo.title}"></h1>
+        <p th:text="${personalInfo.profileDescription}"></p>
+        <a href="#projects" class="cta-button">Mis proyectos</a>
     </div>
-    <p th:text="${personalInfo.profileDescription}"></p>
-    <a href="#projects">
-        <button>Mis proyectos</button>
-    </a>
+    <div class="hero-media">
+        <div class="profile-image-container">
+            <img th:src="${personalInfo.profileImageUrl}" th:alt="|${personalInfo.firstName} Profile Picture|"
+                 class="profile-picture">
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -6,9 +6,8 @@
     <title>Contacto</title>
 </head>
 <body>
-
-<section id="contact" th:fragment="contact">
-    <h2>¡¡¡ HABLEMOS !!!</h2>
+<section id="contact" th:fragment="contact" class="content-section contact-section">
+    <h2 class="section-title">¡¡¡ HABLEMOS !!!</h2>
     <form class="contact-form" action="https://formspree.io/f/mqeveqkb" method="POST">
         <input name="name" type="text" placeholder="Your Name" required>
         <input name="email" type="email" placeholder="Your Email" required>
@@ -16,6 +15,5 @@
         <button type="submit">Send Message</button>
     </form>
 </section>
-
 </body>
 </html>

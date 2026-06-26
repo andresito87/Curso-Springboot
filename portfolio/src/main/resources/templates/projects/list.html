@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/logos/springboot.png">
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/style-list.css">
     <title>Lista de Proyectos</title>
 </head>
-<body>
-
-<header>
-    <div class="container">
-        <div th:insert="~{fragments/navbar :: navbar}"></div>
+<body class="portfolio-page">
+<header class="site-header">
+    <div class="header-container">
+        <th:block th:replace="~{fragments/navbar :: navbar}"></th:block>
     </div>
 </header>
 
-<main>
-    <div class="container">
-        <section class="admin-section">
+<main class="portfolio-main">
+    <div class="container page-shell">
+        <section class="admin-section panel-section">
             <h2>Proyectos guardados</h2>
-            <a th:href="@{/projects/new}">Nuevo Proyecto</a>
+            <div class="admin-toolbar">
+                <a class="admin-action" th:href="@{/projects/new}">Nuevo Proyecto</a>
+            </div>
             <table class="admin-table">
                 <thead>
                 <tr>
@@ -39,7 +41,7 @@
                     <td th:text="${project.title}"></td>
                     <td th:text="${project.description}"></td>
                     <td><a th:href="${project.projectUrl}" th:text="${project.projectUrl}"></a></td>
-                    <td><img th:src="@{${project.imageUrl}}" alt="Imagen del proyecto" width="100"></td>
+                    <td><img th:src="@{${project.imageUrl}}" alt="Imagen del proyecto"></td>
                     <td th:text="${project.personalInfoId}"></td>
                     <td>
                         <a th:href="@{/projects/edit/{id}(id=${project.id})}">Editar</a> |
@@ -53,7 +55,6 @@
     </div>
 </main>
 
-<div th:insert="~{fragments/footer :: footer}"></div>
-
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>

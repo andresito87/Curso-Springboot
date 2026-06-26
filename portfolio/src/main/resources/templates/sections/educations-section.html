@@ -6,10 +6,9 @@
     <title>Educación</title>
 </head>
 <body>
-
-<section id="education" th:fragment="educations">
-    <h2>Mi educación</h2>
-    <div class="education-timeline">
+<section id="education" th:fragment="educations" class="content-section">
+    <h2 class="section-title">Mi educación</h2>
+    <div class="education-timeline timeline-grid">
         <div class="timeline-item" th:each="education : ${educationsList}">
             <h3 th:text="${education.degree} + ' - ' + ${education.institution}"></h3>
             <p class="timeline-date" th:text="${education.startDate} + ' / ' + ${education.endDate}"></p>

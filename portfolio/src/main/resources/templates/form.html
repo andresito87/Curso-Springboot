@@ -3,30 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/logos/springboot.png">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Formulario</title>
 </head>
-<body>
+<body class="portfolio-page">
+<main class="simple-page">
+    <section class="content-section">
+        <h1>Formulario de Información Personal</h1>
 
-<h1>Formulario de Información Personal</h1>
+        <form
+                class="simple-form"
+                method="POST"
+                th:action="@{/personal-info-save}"
+                th:object="${personalInfo}"
+        >
+            <div>
+                <label for="nombre">Nombre:
+                    <input type="text" name="nombre" id="nombre" th:field="*{firstName}">
+                </label>
+            </div>
+            <div>
+                <label for="email">Email:
+                    <input type="email" name="email" id="email" th:field="*{email}">
+                </label>
+            </div>
 
-<form
-        method="POST"
-        th:action="@{/personal-info-save}"
-        th:object="${personalInfo}"
->
-    <div>
-        <label for="nombre">Nombre:
-            <input type="text" name="nombre" id="nombre" th:field="*{firstName}">
-        </label>
-    </div>
-    <div>
-        <label for="email">Email:
-            <input type="email" name="email" id="email" th:field="*{email}">
-        </label>
-    </div>
-
-    <button type="submit">Guardar</button>
-</form>
-
+            <button type="submit">Guardar</button>
+        </form>
+    </section>
+</main>
 </body>
 </html>

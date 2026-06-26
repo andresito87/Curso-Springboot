@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/img/logos/springboot.png">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Error de Validaciones</title>
 </head>
-<body>
-
-<h1>¡UPS. Algo salió mal!</h1>
-<p th:text="${message}"></p>
-<ul>
-    <!--/*@thymesVar id="errors" type="java.util.List<org.springframework.validation.FieldError>"*/-->
-    <!--/*@thymesVar id="defaultMessage" type="java.lang.String"*/-->
-    <li th:each="error : ${errors}" th:text="${error.defaultMessage}">Error</li>
-</ul>
-<a href="/form">Volver al inicio</a>
+<body class="portfolio-page">
+<main class="validation-page">
+    <section class="content-section">
+        <h1>¡UPS. Algo salió mal!</h1>
+        <p th:text="${message}"></p>
+        <ul>
+            <li th:each="error : ${errors}" th:text="${error.defaultMessage}">Error</li>
+        </ul>
+        <a class="button-link" href="/form">Volver al inicio</a>
+    </section>
+</main>
 </body>
 </html>

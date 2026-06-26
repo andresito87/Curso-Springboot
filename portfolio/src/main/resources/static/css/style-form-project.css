@@ -1,16 +1,40 @@
+.project-form {
+    max-width: 74rem;
+}
+
+.file-field {
+    display: grid;
+    gap: 1rem;
+    padding: 1.8rem;
+    border: 1px dashed rgba(159, 176, 201, 0.26);
+    border-radius: 1.8rem;
+    background: rgba(7, 17, 31, 0.42);
+    color: var(--color-text-muted);
+    font-size: 1.45rem;
+}
+
+.file-field label {
+    display: grid;
+    gap: 1rem;
+}
+
+input[type="file"] {
+    color: var(--color-text-muted);
+}
+
 input[type="file"]::file-selector-button {
-    background-color: var(--color-primary-gold);
-    color: var(--color-dark);
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 0.3rem;
-    cursor: pointer;
-    font-weight: bold;
-    margin-right: 1rem;
-    transition: background-color 0.3s ease;
+    margin-right: 1.2rem;
+    padding: 1rem 1.6rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
+    color: var(--color-accent-contrast);
+    font-weight: 700;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 14px 28px rgba(112, 228, 172, 0.14);
 }
 
 input[type="file"]::file-selector-button:hover {
-    background-color: var(--color-dark);
-    color: var(--color-primary-gold);
+    transform: translateY(-1px);
+    box-shadow: 0 20px 30px rgba(112, 228, 172, 0.2);
 }
