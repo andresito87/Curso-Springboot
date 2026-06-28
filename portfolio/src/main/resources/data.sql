@@ -19,10 +19,10 @@ VALUES ('HTML', 95, 'img/logos/html-5.png', 1),
        ('Python', 65, 'img/logos/python.png', 1);
 
 INSERT INTO educations (degree, institution, start_date, end_date, description, personal_info_id)
-VALUES ('Ingeniería en Sistemas', 'Universidad XYZ', '2015-03-01', '2020-12-15',
+VALUES ('Ingeniería de Tecnologías de la Información', 'Uned', '2025-03-01', '2025-12-15',
         'Especialización en desarrollo de software y bases de datos.', 1),
-       ('Curso de Spring Boot Avanzado', 'Plataforma ABC', '2021-01-10', '2021-06-30',
-        'Profundización en microservicios y seguridad.', 1);
+       ('Curso de Spring Boot Avanzado', 'Plataforma Udemy', '2024-01-10', '2024-06-30',
+        'Especialización en microservicios y seguridad.', 1);
 
 INSERT INTO experiences (job_title, company_name, start_date, end_date, description, personal_info_id)
 VALUES ('Desarrollador Full Stack Mid-Senior', 'Tech Solutions S.A.', '2026-01-01', NULL,

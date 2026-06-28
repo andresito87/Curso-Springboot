@@ -1,7 +1,7 @@
 package dev.andrescoder.portfoliobackend.rest;
 
 import dev.andrescoder.portfoliobackend.model.PersonalInfo;
-import dev.andrescoder.portfoliobackend.service.IPersonalInfoService;
+import dev.andrescoder.portfoliobackend.service.interfaces.IPersonalInfoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

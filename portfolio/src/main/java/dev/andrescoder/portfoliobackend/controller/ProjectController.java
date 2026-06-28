@@ -4,7 +4,7 @@ import dev.andrescoder.portfoliobackend.dto.ProjectDto;
 import dev.andrescoder.portfoliobackend.mapper.ProjectMapper;
 import dev.andrescoder.portfoliobackend.model.Project;
 import dev.andrescoder.portfoliobackend.service.FileStorageService;
-import dev.andrescoder.portfoliobackend.service.IProjectService;
+import dev.andrescoder.portfoliobackend.service.interfaces.IProjectService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -34,7 +34,7 @@ public class ProjectController {
     @GetMapping("/new")
     public String formNewProject(Model model) {
         model.addAttribute("projectDto", new ProjectDto());
-        return "projects/form-project";
+        return "projects/form";
     }
 
     @PostMapping("/save")
@@ -52,7 +52,7 @@ public class ProjectController {
 
         // Si hay algún problema en los datos o archivos redirecciona a la página de formulario para mostrar los errores
         if (bindingResult.hasErrors()) {
-            return "projects/form-project";
+            return "projects/form";
         }
 
         Project project = ProjectMapper.toEntity(projectDto);

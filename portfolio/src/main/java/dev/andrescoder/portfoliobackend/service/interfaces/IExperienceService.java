@@ -1,12 +1,12 @@
-package dev.andrescoder.portfoliobackend.repository;
+package dev.andrescoder.portfoliobackend.service.interfaces;
 
 import dev.andrescoder.portfoliobackend.model.Experience;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface IExperienceRepository {
-    Experience save(Experience experience);
+public interface IExperienceService {
+    Experience save(Experience experience) throws IllegalArgumentException;
 
     Optional<Experience> findById(Long id);
 

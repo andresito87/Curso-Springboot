@@ -1,7 +1,8 @@
 package dev.andrescoder.portfoliobackend.service;
 
 import dev.andrescoder.portfoliobackend.model.Project;
-import dev.andrescoder.portfoliobackend.repository.IProjectRepository;
+import dev.andrescoder.portfoliobackend.repository.interfaces.IProjectRepository;
+import dev.andrescoder.portfoliobackend.service.interfaces.IProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,0 +1,81 @@
+/* Admin action bar — consistent across all admin pages */
+.admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Push logout to the far right on wide screens */
+.admin-actions .logout-link {
+    margin-left: auto;
+}
+
+/* Primary action — green gradient (inherits from general.css .admin-action) */
+
+/* Secondary action — outlined, muted */
+.admin-action-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.4rem;
+    padding: 0 1.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--color-text-muted);
+    font-size: 1.45rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.admin-action-secondary:hover {
+    color: var(--color-title);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(159, 176, 201, 0.35);
+    transform: translateY(-1px);
+}
+
+/* Logout button — destructive accent */
+.logout-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.4rem;
+    padding: 0 1.8rem;
+    border: 1px solid rgba(255, 100, 100, 0.35);
+    border-radius: 999px;
+    background: rgba(255, 100, 100, 0.08);
+    color: #ff9a9a;
+    font-size: 1.45rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.logout-link:hover {
+    background: rgba(255, 100, 100, 0.16);
+    border-color: rgba(255, 100, 100, 0.6);
+    color: #ffb0b0;
+    transform: translateY(-1px);
+}
+
+/* Mobile: stack in column — Crear arriba, Ver abajo, Cerrar al final */
+@media (max-width: 640px) {
+    .admin-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-actions .logout-link,
+    .admin-actions .admin-action-secondary {
+        margin-left: 0;
+        text-align: center;
+        justify-content: center;
+    }
+}

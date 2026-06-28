@@ -2,7 +2,8 @@ package dev.andrescoder.portfoliobackend.service;
 
 import dev.andrescoder.portfoliobackend.exception.ValidationException;
 import dev.andrescoder.portfoliobackend.model.Skill;
-import dev.andrescoder.portfoliobackend.repository.ISkillRepository;
+import dev.andrescoder.portfoliobackend.repository.interfaces.ISkillRepository;
+import dev.andrescoder.portfoliobackend.service.interfaces.ISkillService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,8 +34,10 @@ public class SkillServiceTest {
     void testSaveInvalidSkill() {
         Skill invalidSkill = new Skill(null, "", 90, "fab fa-java", 1L);
 
-        assertThrows(ValidationException.class, () -> {
-            skillService.save(invalidSkill);
-        }, "Saving a skill with an empty name should throw an exception");
+        assertThrows(
+                ValidationException.class,
+                () -> skillService.save(invalidSkill),
+                "Saving a skill with an empty name should throw an exception"
+        );
     }
 }

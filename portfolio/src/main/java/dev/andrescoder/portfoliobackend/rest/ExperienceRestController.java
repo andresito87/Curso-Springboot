@@ -1,25 +1,20 @@
 package dev.andrescoder.portfoliobackend.rest;
 
-import dev.andrescoder.portfoliobackend.model.Education;
 import dev.andrescoder.portfoliobackend.model.Experience;
-import dev.andrescoder.portfoliobackend.model.PersonalInfo;
-import dev.andrescoder.portfoliobackend.repository.IExperienceRepository;
-import dev.andrescoder.portfoliobackend.service.IExperienceService;
-import org.springframework.http.HttpStatus;
+import dev.andrescoder.portfoliobackend.service.interfaces.IExperienceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/experience")
-public class ExperienceController {
+public class ExperienceRestController {
 
     private final IExperienceService experienceService;
 
-    public ExperienceController(IExperienceService experienceService) {
+    public ExperienceRestController(IExperienceService experienceService) {
         this.experienceService = experienceService;
     }
 

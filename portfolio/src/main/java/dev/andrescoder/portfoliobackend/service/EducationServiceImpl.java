@@ -2,7 +2,8 @@ package dev.andrescoder.portfoliobackend.service;
 
 import dev.andrescoder.portfoliobackend.exception.ValidationException;
 import dev.andrescoder.portfoliobackend.model.Education;
-import dev.andrescoder.portfoliobackend.repository.IEducationRepository;
+import dev.andrescoder.portfoliobackend.repository.interfaces.IEducationRepository;
+import dev.andrescoder.portfoliobackend.service.interfaces.IEducationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,11 +25,12 @@ public class EducationServiceImpl implements IEducationService {
     @Transactional
     public Education save(Education education) throws IllegalArgumentException {
 
-        // Utiliza la validación que se realiza con anotaciones en los modelos
+        // Utiliza la validación que se realiza con anotaciones en los dtos
         BindingResult result = new BeanPropertyBindingResult(education, "education");
         validator.validate(education, result);
 
-        if (result.hasErrors() || (education.getEndDate() != null && education.getStartDate().isAfter(education.getEndDate()))) {
+        if (result.hasErrors() || (education.getEndDate() != null && education.getStartDate()
+                .isAfter(education.getEndDate()))) {
             throw new ValidationException(result);
         }
 

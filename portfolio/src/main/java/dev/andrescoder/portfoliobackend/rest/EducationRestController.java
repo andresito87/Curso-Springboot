@@ -1,22 +1,20 @@
 package dev.andrescoder.portfoliobackend.rest;
 
 import dev.andrescoder.portfoliobackend.model.Education;
-import dev.andrescoder.portfoliobackend.service.IEducationService;
-import org.springframework.http.HttpStatus;
+import dev.andrescoder.portfoliobackend.service.interfaces.IEducationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/education")
-public class EducationController {
+public class EducationRestController {
 
     private final IEducationService educationService;
 
-    public EducationController(IEducationService educationService) {
+    public EducationRestController(IEducationService educationService) {
         this.educationService = educationService;
     }
 

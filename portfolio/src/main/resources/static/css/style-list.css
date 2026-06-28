@@ -7,6 +7,25 @@
     margin: 0;
 }
 
+/* Scroll wrapper — table scrolls horizontally before clipping */
+.table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 2rem;
+}
+
+/* Minimum width so columns never collapse to nothing */
+.admin-table {
+    min-width: 54rem;
+}
+
+/* Vertical alignment for all cells */
+.admin-table th,
+.admin-table td {
+    vertical-align: middle;
+}
+
+/* Links inside data cells */
 .admin-table td a {
     color: var(--color-accent);
     font-weight: 600;
@@ -14,4 +33,13 @@
 
 .admin-table td a:hover {
     color: var(--color-title);
+}
+
+/* Action buttons cell — row with gap, wraps when space is tight */
+.table-actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
 }

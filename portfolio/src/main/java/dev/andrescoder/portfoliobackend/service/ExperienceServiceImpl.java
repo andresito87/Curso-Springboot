@@ -2,7 +2,8 @@ package dev.andrescoder.portfoliobackend.service;
 
 import dev.andrescoder.portfoliobackend.exception.ValidationException;
 import dev.andrescoder.portfoliobackend.model.Experience;
-import dev.andrescoder.portfoliobackend.repository.IExperienceRepository;
+import dev.andrescoder.portfoliobackend.repository.interfaces.IExperienceRepository;
+import dev.andrescoder.portfoliobackend.service.interfaces.IExperienceService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -27,11 +28,12 @@ public class ExperienceServiceImpl implements IExperienceService {
     @Transactional
     public Experience save(Experience experience) throws IllegalArgumentException {
 
-        // Utiliza la validación que se realiza con anotaciones en los modelos
+        // Utiliza la validación que se realiza con anotaciones en los dtos
         BindingResult result = new BeanPropertyBindingResult(experience, "experience");
         validator.validate(experience, result);
 
-        if (result.hasErrors() || (experience.getEndDate() != null && experience.getStartDate().isAfter(experience.getEndDate()))) {
+        if (result.hasErrors() || (experience.getEndDate() != null && experience.getStartDate()
+                .isAfter(experience.getEndDate()))) {
             throw new ValidationException(result);
         }
 

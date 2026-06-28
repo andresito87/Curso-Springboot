@@ -1,6 +1,7 @@
 package dev.andrescoder.portfoliobackend.repository;
 
 import dev.andrescoder.portfoliobackend.model.Experience;
+import dev.andrescoder.portfoliobackend.repository.interfaces.IExperienceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,7 +1,7 @@
 package dev.andrescoder.portfoliobackend.rest;
 
 import dev.andrescoder.portfoliobackend.model.Skill;
-import dev.andrescoder.portfoliobackend.service.ISkillService;
+import dev.andrescoder.portfoliobackend.service.interfaces.ISkillService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/skill")
-public class SkillController {
+public class SkillRestController {
 
     private final ISkillService skillService;
 
-    public SkillController(ISkillService skillService) {
+    public SkillRestController(ISkillService skillService) {
         this.skillService = skillService;
     }
 

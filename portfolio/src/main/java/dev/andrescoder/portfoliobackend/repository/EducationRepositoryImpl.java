@@ -1,6 +1,7 @@
 package dev.andrescoder.portfoliobackend.repository;
 
 import dev.andrescoder.portfoliobackend.model.Education;
+import dev.andrescoder.portfoliobackend.repository.interfaces.IEducationRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import lombok.RequiredArgsConstructor;

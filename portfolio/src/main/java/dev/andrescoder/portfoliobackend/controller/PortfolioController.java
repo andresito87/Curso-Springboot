@@ -1,7 +1,7 @@
 package dev.andrescoder.portfoliobackend.controller;
 
 import dev.andrescoder.portfoliobackend.model.PersonalInfo;
-import dev.andrescoder.portfoliobackend.service.IPersonalInfoService;
+import dev.andrescoder.portfoliobackend.service.interfaces.IPersonalInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

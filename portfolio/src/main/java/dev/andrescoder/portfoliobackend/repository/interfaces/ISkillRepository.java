@@ -1,4 +1,4 @@
-package dev.andrescoder.portfoliobackend.repository;
+package dev.andrescoder.portfoliobackend.repository.interfaces;
 
 import dev.andrescoder.portfoliobackend.model.Skill;
 

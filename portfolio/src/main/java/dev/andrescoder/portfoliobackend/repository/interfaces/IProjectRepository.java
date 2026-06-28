@@ -1,18 +1,16 @@
-package dev.andrescoder.portfoliobackend.service;
+package dev.andrescoder.portfoliobackend.repository.interfaces;
 
 import dev.andrescoder.portfoliobackend.model.Project;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface IProjectService {
-
+public interface IProjectRepository {
     List<Project> findAll();
 
-    Optional<Project> findById(long id);
+    Optional<Project> findById(Long id);
 
     Project save(Project project);
 
-    void delete(long id);
-
+    void delete(Long id);
 }

@@ -1,6 +1,6 @@
 package dev.andrescoder.portfoliobackend.controller;
 
-import dev.andrescoder.portfoliobackend.service.*;
+import dev.andrescoder.portfoliobackend.service.interfaces.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

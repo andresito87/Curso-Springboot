@@ -7,19 +7,26 @@
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/style-form-project.css">
+    <link rel="stylesheet" href="/css/form-style.css">
     <title>Formulario de Proyecto</title>
 </head>
 <body class="portfolio-page">
+
 <header class="site-header">
     <div class="header-container">
-        <th:block th:replace="~{fragments/navbar :: navbar}"></th:block>
+        <th:block th:replace="~{fragments/navbar-admin :: navbar-admin}"></th:block>
     </div>
 </header>
 
 <main class="portfolio-main">
     <div class="container page-shell">
-        <section id="contact" class="content-section contact-section">
+        <section class="admin-section panel-section">
             <h2 class="section-title">Formulario de Proyecto</h2>
+
+            <div class="admin-actions">
+                <a class="admin-action" th:href="@{/projects}">Volver a Proyectos</a>
+                <a class="logout-link" th:href="@{/logout}">Cerrar Sesión</a>
+            </div>
 
             <form
                     class="contact-form project-form"
@@ -46,8 +53,7 @@
                 <div th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="error-message"></div>
 
                 <input type="number" placeholder="ID Información Personal" th:field="*{personalInfoId}">
-                <div th:if="${#fields.hasErrors('personalInfoId')}" th:errors="*{personalInfoId}"
-                     class="error-message"></div>
+                <div th:if="${#fields.hasErrors('personalInfoId')}" th:errors="*{personalInfoId}" class="error-message"></div>
 
                 <button type="submit">Guardar Proyecto</button>
             </form>

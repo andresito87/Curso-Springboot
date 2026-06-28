@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/img/logos/springboot.png">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/form-style.css">
+    <title th:text="${personalInfoDto.id == null ? 'Crear Información Personal' : 'Editar Información Personal'}">Formulario de Información Personal</title>
+</head>
+<body class="portfolio-page">
+
+<header class="site-header">
+    <div class="header-container">
+        <th:block th:replace="~{fragments/navbar-admin :: navbar-admin}"></th:block>
+    </div>
+</header>
+
+<main class="portfolio-main">
+    <div class="container page-shell">
+        <section class="admin-section panel-section">
+            <h2 th:text="${personalInfoDto.id == null ? 'Crear Información Personal' : 'Editar Información Personal'}">Formulario de Información Personal</h2>
+
+            <div class="admin-actions">
+                <a class="admin-action" th:href="@{/personal-info/create}">Crear Nuevo Portfolio</a>
+                <a class="admin-action" th:href="@{/}">Ver Portfolio Público</a>
+                <a class="logout-link" th:href="@{/logout}">Cerrar Sesión</a>
+            </div>
+
+            <div th:if="${message}" class="message-success">
+                <p th:text="${message}"></p>
+            </div>
+            <div th:if="${error}" class="message-error">
+                <p th:text="${error}"></p>
+            </div>
+
+            <form class="contact-form" th:action="@{/personal-info/save}" th:object="${personalInfoDto}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+
+                <input type="text" th:field="*{firstName}" placeholder="Nombre" required>
+                <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message"></div>
+
+                <input type="text" th:field="*{lastName}" placeholder="Apellido" required>
+                <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message"></div>
+
+                <input type="text" th:field="*{title}" placeholder="Título (ej. Full Stack Developer)" required>
+                <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></div>
+
+                <textarea th:field="*{profileDescription}" placeholder="Descripción de tu perfil (quién soy)" rows="8" required></textarea>
+                <div th:if="${#fields.hasErrors('profileDescription')}" th:errors="*{profileDescription}" class="error-message"></div>
+
+                <input type="text" th:field="*{profileImageUrl}" placeholder="URL de la imagen de perfil" required>
+                <div th:if="${#fields.hasErrors('profileImageUrl')}" th:errors="*{profileImageUrl}" class="error-message"></div>
+
+                <input type="number" th:field="*{yearsOfExperience}" placeholder="Años de experiencia" min="0" required>
+                <div th:if="${#fields.hasErrors('yearsOfExperience')}" th:errors="*{yearsOfExperience}" class="error-message"></div>
+
+                <input type="email" th:field="*{email}" placeholder="Email de contacto" required>
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></div>
+
+                <input type="tel" th:field="*{phone}" placeholder="Número de teléfono" required>
+                <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="error-message"></div>
+
+                <input type="url" th:field="*{linkedinUrl}" placeholder="URL de LinkedIn" required>
+                <div th:if="${#fields.hasErrors('linkedinUrl')}" th:errors="*{linkedinUrl}" class="error-message"></div>
+
+                <input type="url" th:field="*{githubUrl}" placeholder="URL de GitHub" required>
+                <div th:if="${#fields.hasErrors('githubUrl')}" th:errors="*{githubUrl}" class="error-message"></div>
+
+                <button type="submit">Guardar Información Personal</button>
+            </form>
+        </section>
+    </div>
+</main>
+
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+</body>
+</html>

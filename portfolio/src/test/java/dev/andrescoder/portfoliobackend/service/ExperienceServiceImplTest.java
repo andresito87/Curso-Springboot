@@ -2,7 +2,7 @@ package dev.andrescoder.portfoliobackend.service;
 
 import dev.andrescoder.portfoliobackend.exception.ValidationException;
 import dev.andrescoder.portfoliobackend.model.Experience;
-import dev.andrescoder.portfoliobackend.repository.IExperienceRepository;
+import dev.andrescoder.portfoliobackend.repository.interfaces.IExperienceRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

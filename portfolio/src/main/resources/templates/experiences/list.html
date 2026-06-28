@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/style-list.css">
     <link rel="stylesheet" href="/css/form-style.css">
-    <title>Lista de Proyectos</title>
+    <title>Lista de Experiencias Laborales</title>
 </head>
 <body class="portfolio-page">
 
@@ -21,11 +21,18 @@
 <main class="portfolio-main">
     <div class="container page-shell">
         <section class="admin-section panel-section">
-            <h2>Proyectos guardados</h2>
+            <h2>Lista de Experiencias Laborales</h2>
 
             <div class="admin-actions">
-                <a class="admin-action" th:href="@{/projects/new}">Nuevo Proyecto</a>
+                <a class="admin-action" th:href="@{/experiences/new}">Crear Nueva Experiencia</a>
                 <a class="logout-link" th:href="@{/logout}">Cerrar Sesión</a>
+            </div>
+
+            <div th:if="${message}" class="message-success">
+                <p th:text="${message}"></p>
+            </div>
+            <div th:if="${error}" class="message-error">
+                <p th:text="${error}"></p>
             </div>
 
             <div class="table-scroll">
@@ -33,28 +40,30 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Título</th>
+                    <th>Puesto</th>
+                    <th>Compañía</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
                     <th>Descripción</th>
-                    <th>URL del proyecto</th>
-                    <th>Imagen del proyecto</th>
-                    <th>ID Información Personal</th>
+                    <th>ID Info Personal</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="project : ${projects}">
-                    <td th:text="${project.id}"></td>
-                    <td th:text="${project.title}"></td>
-                    <td th:text="${project.description}"></td>
-                    <td><a th:href="${project.projectUrl}" th:text="${project.projectUrl}"></a></td>
-                    <td><img th:src="@{${project.imageUrl}}" alt="Imagen del proyecto"></td>
-                    <td th:text="${project.personalInfoId}"></td>
+                <tr th:each="exp : ${experiences}">
+                    <td th:text="${exp.id}"></td>
+                    <td th:text="${exp.jobTitle}"></td>
+                    <td th:text="${exp.companyName}"></td>
+                    <td th:text="${#temporals.format(exp.startDate, 'dd-MM-yyyy')}"></td>
+                    <td th:text="${exp.endDate != null ? #temporals.format(exp.endDate, 'dd-MM-yyyy') : 'Actual'}"></td>
+                    <td th:text="${exp.description}"></td>
+                    <td th:text="${exp.personalInfoId}"></td>
                     <td>
                         <div class="table-actions">
-                            <a th:href="@{/projects/edit/{id}(id=${project.id})}" class="btn-edit">Editar</a>
-                            <form th:action="@{/projects/delete/{id}(id=${project.id})}" method="post" style="display:inline;">
+                            <a th:href="@{/experiences/edit/{id}(id=${exp.id})}" class="btn-edit">Editar</a>
+                            <form th:action="@{/experiences/delete/{id}(id=${exp.id})}" method="post" style="display:inline;">
                                 <button type="submit" class="btn-delete"
-                                        onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');">
+                                        onclick="return confirm('¿Estás seguro de que quieres eliminar esta experiencia laboral?');">
                                     Eliminar
                                 </button>
                             </form>
@@ -65,7 +74,8 @@
             </table>
             </div>
 
-            <p th:if="${projects == null or projects.isEmpty()}" class="no-data-message">No hay proyectos registrados.</p>
+            <p th:if="${experiences == null or experiences.isEmpty()}" class="no-data-message">No hay experiencias laborales registradas.</p>
+
         </section>
     </div>
 </main>
