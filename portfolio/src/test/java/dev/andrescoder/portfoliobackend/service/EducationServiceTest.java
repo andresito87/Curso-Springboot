@@ -46,14 +46,14 @@ public class EducationServiceTest {
     }
 
     @Test
-    void testSaveInvalidEducation() {
+    void testSaveEducationWithEndDateBeforeStartDateThrowsException() {
 
         Education invalidEducation = new Education(
                 null,
-                "",
                 "Bachelor of Testing",
+                "University of Test",
                 LocalDate.of(2020, 1, 1),
-                LocalDate.of(2024, 1, 1),
+                LocalDate.of(2019, 1, 1),
                 "Allowed to test the testing of tests",
                 1L
         );
@@ -61,7 +61,7 @@ public class EducationServiceTest {
         assertThrows(
                 ValidationException.class,
                 () -> educationService.save(invalidEducation),
-                "Saving an invalid education should throw an exception"
+                "Saving an education with end date before start date should throw an exception"
         );
     }
 

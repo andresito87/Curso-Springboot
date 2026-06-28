@@ -25,17 +25,40 @@ public class ExperienceServiceTest {
 
     @Test
     void testSaveValidExperience() {
-        Experience validExperience = new Experience(null, "Software Engineer", "Company X", LocalDate.of(2020, 1, 1), null, "Descripción", 1L);
+        Experience validExperience = new Experience(
+                null,
+                "Software Engineer",
+                "Company X",
+                LocalDate.of(2020, 1, 1),
+                null,
+                "Descripción",
+                1L
+        );
         Experience savedExperience = experienceService.save(validExperience);
 
         assertNotNull(savedExperience.getId(), "Saved experience must have an id");
-        assertNotNull(experienceRepository.findById(savedExperience.getId()).orElse(null), "Saved experience must exist in the database");
+        assertNotNull(
+                experienceRepository.findById(savedExperience.getId()).orElse(null),
+                "Saved experience must exist in the database"
+        );
     }
 
     @Test
-    void testSaveInvalidCompanyName() {
-        Experience invalidExperience = new Experience(null, "Software Engineer", "", LocalDate.of(2020, 1, 1), null, "Descripción", 1L);
+    void testSaveExperienceWithEndDateBeforeStartDateThrowsException() {
+        Experience invalidExperience = new Experience(
+                null,
+                "Software Engineer",
+                "Company X",
+                LocalDate.of(2024, 1, 1),
+                LocalDate.of(2020, 1, 1),
+                "Descripción",
+                1L
+        );
 
-        assertThrows(ValidationException.class, () -> experienceService.save(invalidExperience), "A ValidationException must be thrown when the company name is empty");
+        assertThrows(
+                ValidationException.class,
+                () -> experienceService.save(invalidExperience),
+                "A ValidationException must be thrown when end date is before start date"
+        );
     }
 }

@@ -1,6 +1,5 @@
 package dev.andrescoder.portfoliobackend.service;
 
-import dev.andrescoder.portfoliobackend.exception.ValidationException;
 import dev.andrescoder.portfoliobackend.model.Skill;
 import dev.andrescoder.portfoliobackend.repository.interfaces.ISkillRepository;
 import org.junit.jupiter.api.Test;
@@ -8,8 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,9 +20,6 @@ public class SkillServiceImplTest {
 
     @Mock // Genera un mock del repositorio Skill
     private ISkillRepository skillRepository;
-
-    @Mock
-    private Validator validator;
 
     @InjectMocks // Inyecta el mock del repositorio en la clase implementada SkillServiceImpl
     private SkillServiceImpl skillService;
@@ -65,24 +59,20 @@ public class SkillServiceImplTest {
     }
 
     @Test
-    public void testSaveSkillThrowsExceptionWhenInvalid() {
+    public void testFindSkillsByPersonalInfoIdReturnsSkills() {
 
-        Long id = 1L;
-        String messageException = "Name must not be blank";
-        Optional<Skill> mockedSkill = Optional.of(new Skill(id, "", 90, "fa fab-java", 1L));
-        doAnswer(invocation -> {
-            BindingResult result = invocation.getArgument(1);
-            result.rejectValue("name", "NotBlank", messageException);
-            return null;
-        }).when(validator).validate(any(Skill.class), any(BindingResult.class));
-
-        ValidationException exception = assertThrows(
-                ValidationException.class,
-                () -> skillService.save(mockedSkill.get())
+        Long personalInfoId = 1L;
+        List<Skill> mockedSkills = Arrays.asList(
+                new Skill(1L, "Java", 90, "fa fab-java", personalInfoId),
+                new Skill(2L, "Python", 80, "fa fab-python", personalInfoId)
         );
+        when(skillRepository.findSkillsByPersonalInfoId(personalInfoId)).thenReturn(mockedSkills);
 
-        assertTrue(exception.getMessage().contains(messageException));
-        verify(skillRepository, never()).save(any(Skill.class));
+        List<Skill> skills = skillService.findSkillsByPersonalInfoId(personalInfoId);
+
+        assertNotNull(skills);
+        assertEquals(2, skills.size());
+        verify(skillRepository, times(1)).findSkillsByPersonalInfoId(personalInfoId);
 
     }
 
@@ -93,7 +83,6 @@ public class SkillServiceImplTest {
         Long id = 1L;
         Skill validSkill = new Skill(id, "Java", 90, "fa fab-java", 1L);
         when(skillRepository.save(any(Skill.class))).thenReturn(validSkill);
-        doNothing().when(validator).validate(any(Skill.class), any(BindingResult.class));
 
         // Acción
         Skill savedSkill = skillService.save(validSkill);

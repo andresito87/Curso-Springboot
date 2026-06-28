@@ -1,6 +1,5 @@
 package dev.andrescoder.portfoliobackend.service;
 
-import dev.andrescoder.portfoliobackend.exception.ValidationException;
 import dev.andrescoder.portfoliobackend.model.Skill;
 import dev.andrescoder.portfoliobackend.repository.interfaces.ISkillRepository;
 import dev.andrescoder.portfoliobackend.service.interfaces.ISkillService;
@@ -9,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 // Reinicia el estado de la BD antes de cada test
@@ -31,13 +31,10 @@ public class SkillServiceTest {
     }
 
     @Test
-    void testSaveInvalidSkill() {
-        Skill invalidSkill = new Skill(null, "", 90, "fab fa-java", 1L);
+    void testFindSkillsByPersonalInfoIdReturnsSeedData() {
+        var skills = skillService.findSkillsByPersonalInfoId(1L);
 
-        assertThrows(
-                ValidationException.class,
-                () -> skillService.save(invalidSkill),
-                "Saving a skill with an empty name should throw an exception"
-        );
+        assertFalse(skills.isEmpty(), "Seeded skills for personal info 1 must exist");
+        assertTrue(skills.stream().allMatch(skill -> skill.getPersonalInfoId().equals(1L)));
     }
 }

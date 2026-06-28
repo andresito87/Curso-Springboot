@@ -35,3 +35,6 @@ VALUES ('Portfolio Personal', 'Un portafolio web para mostrar mis habilidades y 
         'img/projects/project2.jpg', 'https://www.andrescoder.dev/es', 1),
        ('Aplicación de E-commerce', 'Plataforma de comercio electrónico con carrito de compras y pasarela de pago.',
         'img/projects/project1.jpg', 'https://github.com/andresito87/NutriSport', 1);
+
+INSERT INTO users (username, password, enabled)
+VALUES ('admin', '{bcrypt}$2a$10$XA/HeqHnwkj5cx3bUeTaY.YMGgnlRk0liw6SpJabJ340c02ui89eu', TRUE);

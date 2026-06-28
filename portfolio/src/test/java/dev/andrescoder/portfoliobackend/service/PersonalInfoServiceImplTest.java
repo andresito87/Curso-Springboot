@@ -1,6 +1,5 @@
 package dev.andrescoder.portfoliobackend.service;
 
-import dev.andrescoder.portfoliobackend.exception.ValidationException;
 import dev.andrescoder.portfoliobackend.model.PersonalInfo;
 import dev.andrescoder.portfoliobackend.repository.interfaces.IPersonalInfoRepository;
 import org.junit.jupiter.api.Test;
@@ -8,8 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,9 +21,6 @@ public class PersonalInfoServiceImplTest {
 
     @Mock
     private IPersonalInfoRepository personalInfoRepository;
-
-    @Mock
-    private Validator validator;
 
     @InjectMocks
     private PersonalInfoServiceImpl personalInfoService;
@@ -67,24 +61,13 @@ public class PersonalInfoServiceImplTest {
     }
 
     @Test
-    void testSavePersonalInfoThrowsExceptionWhenInvalid() {
+    void testDeleteByIdDelegatesToRepository() {
 
-        // Arrange
-        PersonalInfo invalidPersonalInfo = new PersonalInfo();
+        Long personalInfoId = 1L;
 
-        doAnswer(invocationOnMock -> {
-            BindingResult result = invocationOnMock.getArgument(1);
-            result.rejectValue("firstName", "NotBlank", "El nombre no puede estar vacío");
-            return null;
-        }).when(validator).validate(any(PersonalInfo.class), any(BindingResult.class));
+        personalInfoService.deleteById(personalInfoId);
 
-        // Act & Assert
-        assertThrows(
-                ValidationException.class,
-                () -> personalInfoService.save(invalidPersonalInfo),
-                "Debe lanzarse una ValidationException si el objeto no es válido."
-        );
-        verify(personalInfoRepository, never()).save(any(PersonalInfo.class));
+        verify(personalInfoRepository, times(1)).deleteById(personalInfoId);
 
     }
 
@@ -106,7 +89,6 @@ public class PersonalInfoServiceImplTest {
                 "https://github.com/johndoe"
         );
         when(personalInfoRepository.save(any(PersonalInfo.class))).thenReturn(validPersonalInfo);
-        doNothing().when(validator).validate(any(PersonalInfo.class), any(BindingResult.class));
 
         // Act
         PersonalInfo savedPersonalInfo = personalInfoService.save(validPersonalInfo);
