@@ -20,29 +20,58 @@
 <main class="portfolio-main">
     <div class="container page-shell">
         <section class="admin-section panel-section">
-            <h2 th:text="${skillDto.id == null ? 'Crear Nueva Habilidad' : 'Editar Habilidad'}">Formulario de Habilidades</h2>
-
-            <div class="admin-actions">
-                <a class="admin-action" th:href="@{/skills}">Volver a Habilidades</a>
-                <a class="logout-link" th:href="@{/logout}">Cerrar Sesión</a>
+            <div class="admin-header">
+                <h2 class="section-title"
+                    th:text="${skillDto.id == null ? 'Crear Nueva Habilidad' : 'Editar Habilidad'}">Formulario de
+                    Habilidades</h2>
+                <p class="admin-copy">Ajustá habilidades con el mismo patrón visual de labels, espaciado y acciones del
+                    panel.</p>
             </div>
 
-            <form class="contact-form" method="post" th:action="@{/skills/save}" th:object="${skillDto}">
+            <div class="admin-actions">
+                <a class="admin-action-secondary" th:href="@{/skills}">Volver a Habilidades</a>
+                <!-- Permite evitar problemas de manipulación del formulario utilizando token csrf -->
+                <form class="inline-form" th:action="@{/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button class="logout-link" type="submit">Cerrar Sesión</button>
+                </form>
+            </div>
+
+            <form class="contact-form admin-form" method="post" th:action="@{/skills/save}" th:object="${skillDto}">
                 <input type="hidden" th:field="*{id}"/>
 
-                <input type="text" placeholder="Nombre de la habilidad" th:field="*{name}" required>
+                <div class="field-group">
+                    <label for="name">Nombre de la Habilidad</label>
+                    <input id="name" type="text" placeholder="Nombre de la habilidad" th:field="*{name}" required>
+                </div>
                 <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-message"></div>
 
-                <input type="number" placeholder="Porcentaje (0-100)" th:field="*{levelPercentage}" required min="0" max="100">
-                <div th:if="${#fields.hasErrors('levelPercentage')}" th:errors="*{levelPercentage}" class="error-message"></div>
+                <div class="field-group">
+                    <label for="levelPercentage">Porcentaje</label>
+                    <input id="levelPercentage" type="number" placeholder="Porcentaje (0-100)"
+                           th:field="*{levelPercentage}" required min="0" max="100">
+                </div>
+                <div th:if="${#fields.hasErrors('levelPercentage')}" th:errors="*{levelPercentage}"
+                     class="error-message"></div>
 
-                <input type="text" placeholder="Clase del ícono (ej. fas fa-code)" th:field="*{iconClass}" required>
+                <div class="field-group">
+                    <label for="iconClass">Clase del Ícono</label>
+                    <input id="iconClass" type="text" placeholder="Clase del ícono (ej. fas fa-code)"
+                           th:field="*{iconClass}" required>
+                </div>
                 <div th:if="${#fields.hasErrors('iconClass')}" th:errors="*{iconClass}" class="error-message"></div>
 
-                <input type="number" placeholder="ID Información Personal" th:field="*{personalInfoId}" required>
-                <div th:if="${#fields.hasErrors('personalInfoId')}" th:errors="*{personalInfoId}" class="error-message"></div>
+                <div class="field-group">
+                    <label for="personalInfoId">ID Información Personal</label>
+                    <input id="personalInfoId" type="number" placeholder="ID Información Personal"
+                           th:field="*{personalInfoId}" required>
+                </div>
+                <div th:if="${#fields.hasErrors('personalInfoId')}" th:errors="*{personalInfoId}"
+                     class="error-message"></div>
 
-                <button type="submit">Guardar Habilidad</button>
+                <div class="form-actions">
+                    <button type="submit">Guardar Habilidad</button>
+                </div>
             </form>
         </section>
     </div>

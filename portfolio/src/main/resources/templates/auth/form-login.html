@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/png" href="/img/logos/springboot.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="portfolio-page login-page">
+<main class="portfolio-main login-main">
+    <div class="container page-shell login-shell">
+        <section class="panel-section login-panel">
+            <div class="login-panel-copy admin-header">
+                <p class="login-eyebrow">Acceso al panel</p>
+                <h1 class="section-title">Iniciar sesión</h1>
+                <p class="admin-copy">Accede al panel de administración para actualizar tu información, proyectos y
+                    habilidades.</p>
+            </div>
+
+            <div th:if="${message}" class="message-success" role="status">
+                <p th:text="${message}"></p>
+            </div>
+
+            <form th:action="@{/login}" method="post" class="contact-form admin-form login-form">
+                <div class="field-group">
+                    <label for="username">Usuario</label>
+                    <input id="username" type="text" name="username" placeholder="Introduce tu usuario"
+                           autocomplete="username" required>
+                </div>
+
+                <div class="field-group">
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" name="password" placeholder="Introduce tu contraseña"
+                           autocomplete="current-password" required>
+                </div>
+
+                <div th:if="${error}" class="message-error login-form-message" role="alert">
+                    <p th:text="${error}"></p>
+                </div>
+
+                <div class="form-actions login-actions">
+                    <button type="submit">Acceder</button>
+                    <a class="admin-action-secondary login-secondary-action" th:href="@{/}">Volver al portfolio</a>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+</body>
+</html>

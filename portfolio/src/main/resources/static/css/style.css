@@ -2,6 +2,12 @@
     color: var(--color-text);
 }
 
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .site-header {
     position: relative;
     overflow: hidden;
@@ -61,6 +67,10 @@
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+.site-nav form {
+    margin: 0;
 }
 
 .site-nav a {
@@ -153,6 +163,14 @@
 
 .portfolio-main {
     position: relative;
+}
+
+.login-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 3.2rem 0 4.8rem;
 }
 
 .about-section {
@@ -359,6 +377,21 @@
     font-size: clamp(2.8rem, 4vw, 4rem);
 }
 
+.admin-header {
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-header .section-title,
+.admin-header h2 {
+    margin-bottom: 0;
+}
+
+.admin-copy {
+    margin: 0;
+    max-width: 72rem;
+}
+
 .admin-toolbar {
     display: flex;
     justify-content: flex-end;
@@ -453,6 +486,65 @@
     font-weight: 600;
 }
 
+.message-success p,
+.message-error p {
+    margin: 0;
+}
+
+.login-form-message {
+    margin: -0.2rem 0 0;
+}
+
+.admin-form {
+    gap: 2rem;
+}
+
+.field-group {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.field-group label,
+.field-group legend {
+    color: var(--color-title);
+    font-size: 1.45rem;
+    font-weight: 600;
+}
+
+.field-group input,
+.field-group textarea {
+    margin: 0;
+}
+
+.field-hint {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 1.35rem;
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    padding-top: 0.8rem;
+}
+
+.inline-form {
+    display: inline;
+    margin: 0;
+}
+
+.no-data-message {
+    margin: 0;
+    padding: 2.4rem;
+    border: 1px dashed rgba(159, 176, 201, 0.24);
+    border-radius: var(--radius-md);
+    background: rgba(7, 17, 31, 0.36);
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
 .btn-edit {
     display: inline-flex;
     align-items: center;
@@ -499,6 +591,146 @@
     border-color: rgba(255, 100, 100, 0.6);
 }
 
+.login-shell {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.login-panel {
+    width: min(100%, 56rem);
+    margin: 0 auto;
+}
+
+.login-panel-copy {
+    margin-bottom: 2.8rem;
+    justify-items: center;
+    text-align: center;
+}
+
+.login-eyebrow {
+    margin: 0;
+    color: var(--color-accent);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.login-form {
+    width: 100%;
+}
+
+.login-form .field-group {
+    gap: 1rem;
+}
+
+.login-form input {
+    min-height: 5.4rem;
+}
+
+.login-actions {
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.login-actions button,
+.login-actions .admin-action-secondary {
+    min-width: 18rem;
+    min-height: 5.2rem;
+}
+
+.login-actions .admin-action-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--color-text-muted);
+    font-size: 1.45rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.login-actions .admin-action-secondary:hover {
+    color: var(--color-title);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(159, 176, 201, 0.35);
+    transform: translateY(-1px);
+}
+
+.login-secondary-action {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.personalinfo-form-page .admin-section {
+    gap: 0;
+}
+
+.personalinfo-form-header {
+    margin-bottom: 2.4rem;
+}
+
+.personalinfo-form-header .section-title {
+    max-width: 70rem;
+}
+
+.personalinfo-form-actions {
+    margin-bottom: 3.2rem;
+}
+
+.personalinfo-form-submit {
+    padding-top: 1.2rem;
+    justify-content: flex-start;
+}
+
+.btn-logout {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: var(--color-border);
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-logout:hover {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transform: translateY(-2px);
+}
+
+.logout-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.4rem;
+    padding: 0 1.8rem;
+    border: 1px solid rgba(255, 100, 100, 0.35);
+    border-radius: 999px;
+    background: rgba(255, 100, 100, 0.08);
+    color: #ff9a9a;
+    font-size: 1.45rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.logout-link:hover {
+    background: rgba(255, 100, 100, 0.16);
+    border-color: rgba(255, 100, 100, 0.6);
+    color: #ffb0b0;
+    transform: translateY(-1px);
+}
+
 @media (max-width: 960px) {
     .hero-copy {
         max-width: none;
@@ -514,6 +746,10 @@
 }
 
 @media (max-width: 768px) {
+    .login-main {
+        padding: 2.4rem 0 4rem;
+    }
+
     .site-header {
         padding: 1.4rem 0 3rem;
     }
@@ -550,6 +786,20 @@
         min-height: 4rem;
         padding: 0 1.2rem;
         font-size: 1.35rem;
+    }
+
+    .login-panel-copy {
+        margin-bottom: 2.4rem;
+    }
+
+    .login-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .login-actions .admin-action-secondary,
+    .login-actions button {
+        width: 100%;
     }
 
 }

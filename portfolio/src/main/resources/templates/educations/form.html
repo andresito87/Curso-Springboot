@@ -20,37 +20,70 @@
 <main class="portfolio-main">
     <div class="container page-shell">
         <section class="admin-section panel-section">
-            <h2 th:text="${educationDto.id == null ? 'Crear Nueva Educación' : 'Editar Educación'}">Formulario de Educaciones</h2>
-
-            <div class="admin-actions">
-                <a class="admin-action" th:href="@{/educations}">Volver a Educación</a>
-                <a class="logout-link" th:href="@{/logout}">Cerrar Sesión</a>
+            <div class="admin-header">
+                <h2 class="section-title"
+                    th:text="${educationDto.id == null ? 'Crear Nueva Educación' : 'Editar Educación'}">Formulario de
+                    Educaciones</h2>
+                <p class="admin-copy">Completa los datos académicos con el mismo formato visual que utiliza el resto del
+                    panel.</p>
             </div>
 
-            <form class="contact-form" th:action="@{/educations/save}" th:object="${educationDto}" method="post">
+            <div class="admin-actions">
+                <a class="admin-action-secondary" th:href="@{/educations}">Volver a Educación</a>
+                <!-- Permite evitar problemas de manipulación del formulario utilizando token csrf -->
+                <form class="inline-form" th:action="@{/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button class="logout-link" type="submit">Cerrar Sesión</button>
+                </form>
+            </div>
+
+            <form class="contact-form admin-form" th:action="@{/educations/save}" th:object="${educationDto}"
+                  method="post">
                 <input type="hidden" th:field="*{id}"/>
 
-                <input type="text" th:field="*{degree}" placeholder="Título obtenido" required>
+                <div class="field-group">
+                    <label for="degree">Título obtenido</label>
+                    <input id="degree" type="text" th:field="*{degree}" placeholder="Título obtenido" required>
+                </div>
                 <div th:if="${#fields.hasErrors('degree')}" th:errors="*{degree}" class="error-message"></div>
 
-                <input type="text" th:field="*{institution}" placeholder="Institución" required>
+                <div class="field-group">
+                    <label for="institution">Institución</label>
+                    <input id="institution" type="text" th:field="*{institution}" placeholder="Institución" required>
+                </div>
                 <div th:if="${#fields.hasErrors('institution')}" th:errors="*{institution}" class="error-message"></div>
 
-                <label for="startDate">Fecha de Inicio:</label>
-                <input type="date" id="startDate" th:field="*{startDate}" required>
+                <div class="field-group">
+                    <label for="startDate">Fecha de Inicio</label>
+                    <input type="date" id="startDate" th:field="*{startDate}" required>
+                </div>
                 <div th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="error-message"></div>
 
-                <label for="endDate">Fecha de Fin (opcional):</label>
-                <input type="date" id="endDate" th:field="*{endDate}">
+                <div class="field-group">
+                    <label for="endDate">Fecha de Fin</label>
+                    <p class="field-hint">Déjalo vacío si la formación sigue en curso.</p>
+                    <input type="date" id="endDate" th:field="*{endDate}">
+                </div>
                 <div th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}" class="error-message"></div>
 
-                <textarea th:field="*{description}" placeholder="Descripción de la educación" rows="5" required></textarea>
+                <div class="field-group">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" th:field="*{description}" placeholder="Descripción de la educación"
+                              rows="5" required></textarea>
+                </div>
                 <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error-message"></div>
 
-                <input type="number" th:field="*{personalInfoId}" placeholder="ID Información Personal" required>
-                <div th:if="${#fields.hasErrors('personalInfoId')}" th:errors="*{personalInfoId}" class="error-message"></div>
+                <div class="field-group">
+                    <label for="personalInfoId">ID Información Personal</label>
+                    <input id="personalInfoId" type="number" th:field="*{personalInfoId}"
+                           placeholder="ID Información Personal" required>
+                </div>
+                <div th:if="${#fields.hasErrors('personalInfoId')}" th:errors="*{personalInfoId}"
+                     class="error-message"></div>
 
-                <button type="submit">Guardar Educación</button>
+                <div class="form-actions">
+                    <button type="submit">Guardar Educación</button>
+                </div>
             </form>
         </section>
     </div>

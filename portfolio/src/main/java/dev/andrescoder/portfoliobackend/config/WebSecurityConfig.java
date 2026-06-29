@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,7 +24,7 @@ public class WebSecurityConfig {
     @Bean
     // SecurityFilterChain es una interfaz que define la cadena de filtros de seguridad que se aplican a las
     // solicitudes HTTP entrantes. Es el flujo de seguridad por defecto que se aplica en las peticiones http.
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
         http.authorizeHttpRequests(auth -> auth.requestMatchers(
                                 "/educations",
                                 "/experiences",
@@ -57,7 +56,22 @@ public class WebSecurityConfig {
                                 "/personal-info" + "/delete/**"
                         ).authenticated() // Requiere autenticación para acceder a esas rutas
                         .anyRequest().permitAll()) // Y permitimos el acceso libre al resto de rutas
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll); // Habilita el formulario de login
+                .formLogin(form -> form.defaultSuccessUrl("/personal-info", true) // Redirige al hacer login correcto
+                        .failureUrl("/login?error") // Redirige login param?error= al login con credencial incorrecta
+                        .loginPage("/login").permitAll()) // Habilita el formulario de login
+                .logout(logout -> logout.logoutUrl("/logout") // Habilita el logout en la ruta /logout
+                        .logoutRequestMatcher(request ->
+                                // Acepta POST para que funcionen los enlaces y los formularios utilizando la
+                                // protección contra csrf con el token incrustado en el formulario
+                                ("POST".equalsIgnoreCase(request.getMethod()) && "/logout".equals(request.getRequestURI()))) // Configura la ruta de logout
+                        .logoutSuccessUrl("/login?logout") // Redirige a login con param?logout= al hacer logout
+                        .invalidateHttpSession(true) // Invalida la sesión al hacer logout
+                        .deleteCookies("JSESSIONID") // Elimina la cookie de sesión al hacer logout
+                        // la ruta /logout es url pública para que el instante mientras el usuario hace logout,
+                        // pueda acceder a la url sin estar autenticado. Si no fuera así Spring podría bloquear el
+                        // proceso justo después de eliminar la cookie, impidiendo completar el proceso de logout
+                        .permitAll());
+
 
         return http.build();
     }
@@ -66,16 +80,6 @@ public class WebSecurityConfig {
     private void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
-//    Crea un usuario en el sistema de autenticación con el rol de administrador
-//    @Bean
-//    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-//        UserDetails user = User.withUsername("admin")
-//                .password(passwordEncoder.encode("1234")) // Utiliza bean creado para encriptar contraseña
-//                .roles("ADMIN").build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
 
     // Crea encriptador de contraseñas para los usuarios registrados en el sistema
     @Bean

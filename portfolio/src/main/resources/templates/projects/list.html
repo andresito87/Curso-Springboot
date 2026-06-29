@@ -21,51 +21,61 @@
 <main class="portfolio-main">
     <div class="container page-shell">
         <section class="admin-section panel-section">
-            <h2>Proyectos guardados</h2>
+            <div class="admin-header">
+                <h2 class="section-title">Proyectos guardados</h2>
+                <p class="admin-copy">Visualiza los proyectos guardados con enlaces, imagen y acciones agrupadas de
+                    forma coherente.</p>
+            </div>
 
             <div class="admin-actions">
-                <a class="admin-action" th:href="@{/projects/new}">Nuevo Proyecto</a>
-                <a class="logout-link" th:href="@{/logout}">Cerrar Sesión</a>
+                <a class="admin-action" th:href="@{/projects/new}">Crear Nuevo Proyecto</a>
+                <!-- Permite evitar problemas de manipulación del formulario utilizando token csrf -->
+                <form class="inline-form" th:action="@{/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button class="logout-link" type="submit">Cerrar Sesión</button>
+                </form>
             </div>
 
             <div class="table-scroll">
-            <table class="admin-table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Descripción</th>
-                    <th>URL del proyecto</th>
-                    <th>Imagen del proyecto</th>
-                    <th>ID Información Personal</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="project : ${projects}">
-                    <td th:text="${project.id}"></td>
-                    <td th:text="${project.title}"></td>
-                    <td th:text="${project.description}"></td>
-                    <td><a th:href="${project.projectUrl}" th:text="${project.projectUrl}"></a></td>
-                    <td><img th:src="@{${project.imageUrl}}" alt="Imagen del proyecto"></td>
-                    <td th:text="${project.personalInfoId}"></td>
-                    <td>
-                        <div class="table-actions">
-                            <a th:href="@{/projects/edit/{id}(id=${project.id})}" class="btn-edit">Editar</a>
-                            <form th:action="@{/projects/delete/{id}(id=${project.id})}" method="post" style="display:inline;">
-                                <button type="submit" class="btn-delete"
-                                        onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');">
-                                    Eliminar
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                <table class="admin-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Descripción</th>
+                        <th>URL del proyecto</th>
+                        <th>Imagen del proyecto</th>
+                        <th>ID Información Personal</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="project : ${projects}">
+                        <td th:text="${project.id}"></td>
+                        <td th:text="${project.title}"></td>
+                        <td th:text="${project.description}"></td>
+                        <td><a th:href="${project.projectUrl}" th:text="${project.projectUrl}"></a></td>
+                        <td><img th:src="@{${project.imageUrl}}" alt="Imagen del proyecto"></td>
+                        <td th:text="${project.personalInfoId}"></td>
+                        <td>
+                            <div class="table-actions">
+                                <a th:href="@{/projects/edit/{id}(id=${project.id})}" class="btn-edit">Editar</a>
+                                <form class="inline-form" th:action="@{/projects/delete/{id}(id=${project.id})}"
+                                      method="post">
+                                    <button type="submit" class="btn-delete"
+                                            onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <p th:if="${projects == null or projects.isEmpty()}" class="no-data-message">No hay proyectos registrados.</p>
+            <p th:if="${projects == null or projects.isEmpty()}" class="no-data-message">No hay proyectos
+                registrados.</p>
         </section>
     </div>
 </main>

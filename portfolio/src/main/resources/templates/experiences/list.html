@@ -21,11 +21,19 @@
 <main class="portfolio-main">
     <div class="container page-shell">
         <section class="admin-section panel-section">
-            <h2>Lista de Experiencias Laborales</h2>
+            <div class="admin-header">
+                <h2 class="section-title">Lista de Experiencias Laborales</h2>
+                <p class="admin-copy">Gestioná el historial profesional con la misma tabla, estados y agrupación de
+                    acciones del admin.</p>
+            </div>
 
             <div class="admin-actions">
                 <a class="admin-action" th:href="@{/experiences/new}">Crear Nueva Experiencia</a>
-                <a class="logout-link" th:href="@{/logout}">Cerrar Sesión</a>
+                <!-- Permite evitar problemas de manipulación del formulario utilizando token csrf -->
+                <form class="inline-form" th:action="@{/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button class="logout-link" type="submit">Cerrar Sesión</button>
+                </form>
             </div>
 
             <div th:if="${message}" class="message-success">
@@ -36,45 +44,47 @@
             </div>
 
             <div class="table-scroll">
-            <table class="admin-table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Puesto</th>
-                    <th>Compañía</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
-                    <th>Descripción</th>
-                    <th>ID Info Personal</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="exp : ${experiences}">
-                    <td th:text="${exp.id}"></td>
-                    <td th:text="${exp.jobTitle}"></td>
-                    <td th:text="${exp.companyName}"></td>
-                    <td th:text="${#temporals.format(exp.startDate, 'dd-MM-yyyy')}"></td>
-                    <td th:text="${exp.endDate != null ? #temporals.format(exp.endDate, 'dd-MM-yyyy') : 'Actual'}"></td>
-                    <td th:text="${exp.description}"></td>
-                    <td th:text="${exp.personalInfoId}"></td>
-                    <td>
-                        <div class="table-actions">
-                            <a th:href="@{/experiences/edit/{id}(id=${exp.id})}" class="btn-edit">Editar</a>
-                            <form th:action="@{/experiences/delete/{id}(id=${exp.id})}" method="post" style="display:inline;">
-                                <button type="submit" class="btn-delete"
-                                        onclick="return confirm('¿Estás seguro de que quieres eliminar esta experiencia laboral?');">
-                                    Eliminar
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                <table class="admin-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Puesto</th>
+                        <th>Compañía</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Descripción</th>
+                        <th>ID Info Personal</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="exp : ${experiences}">
+                        <td th:text="${exp.id}"></td>
+                        <td th:text="${exp.jobTitle}"></td>
+                        <td th:text="${exp.companyName}"></td>
+                        <td th:text="${#temporals.format(exp.startDate, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${exp.endDate != null ? #temporals.format(exp.endDate, 'dd-MM-yyyy') : 'Actual'}"></td>
+                        <td th:text="${exp.description}"></td>
+                        <td th:text="${exp.personalInfoId}"></td>
+                        <td>
+                            <div class="table-actions">
+                                <a th:href="@{/experiences/edit/{id}(id=${exp.id})}" class="btn-edit">Editar</a>
+                                <form class="inline-form" th:action="@{/experiences/delete/{id}(id=${exp.id})}"
+                                      method="post">
+                                    <button type="submit" class="btn-delete"
+                                            onclick="return confirm('¿Estás seguro de que quieres eliminar esta experiencia laboral?');">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <p th:if="${experiences == null or experiences.isEmpty()}" class="no-data-message">No hay experiencias laborales registradas.</p>
+            <p th:if="${experiences == null or experiences.isEmpty()}" class="no-data-message">No hay experiencias
+                laborales registradas.</p>
 
         </section>
     </div>
