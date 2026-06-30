@@ -1,56 +1,78 @@
-# Springboot Course
+# Curso Spring Boot
 
-This is a Spring Boot course project that demonstrates the use of Spring Boot framework for building web applications
+Repositorio con varios proyectos de aprendizaje en Spring Boot. Si quieres arrancar el proyecto principal de este
+repositorio, ahora mismo el foco está en `portfolio/`.
 
-## Prerequisites
+## Portfolio: arranque rápido
 
-- Java Development Kit (JDK) 8 or higher
-- Maven 3.6 or higher
-- An IDE such as IntelliJ IDEA or Eclipse
-- Postman for testing APIs
-- MySQL or any other relational database
+### Requisitos
 
-### Getting Started
+- Java 21
+- Maven 3.9+ (o usar `./mvnw`)
+- Servidor PostgreSQL 15+ (local o remoto)
 
-1. Clone the repository to your local machine using the following command:
+### 1. Entrar en el proyecto
 
-   ```bash
-   git clone
-   ````
+Desde la raíz del repositorio:
 
-2. Navigate to the project directory:
+```bash
+cd portfolio
+```
 
-   ```bash
-    cd portfolio
-    ````
+### 2. Crear el archivo `.env`
 
-3. Open the project in your preferred IDE.
-4. Configure the database connection in the `application.properties` file located in the `src/main/resources` directory. Update the following properties with your database credentials:
+Copia la plantilla incluida:
 
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name
-   spring.datasource.username=your_username
-   spring.datasource.password=your_password
-   spring.jpa.hibernate.ddl-auto=update
-   ```
+```bash
+cp .env.example .env
+```
 
-## Running the Application
+Después, completa tus credenciales de PostgreSQL en `.env`:
 
-1. Build the project using Maven:
+```env
+PG_URL_DATABASE=jdbc:postgresql://YOUR_PG_HOST/YOUR_PG_DATABASE?sslmode=require&channelBinding=require
+PG_USER=YOUR_PG_USER
+PG_PASSWORD=YOUR_PG_PASSWORD
+```
 
-   ```bash
-   mvn clean install
-   ```
+> `application.properties` importa este archivo con `spring.config.import=optional:file:.env[.properties]`.
 
-2. Run the application using the following command:
+### 3. Arrancar la aplicación
 
-   ```bash
-    mvn spring-boot:run
-    ```
+Con Maven Wrapper:
 
-## Projects Images
+```bash
+./mvnw spring-boot:run
+```
 
+O, si tienes Maven instalado de forma global:
 
-## Udemy Course Link
+```bash
+mvn spring-boot:run
+```
+
+### 4. Abrir la aplicación
+
+Cuando arranque correctamente, estará disponible en:
+
+```text
+http://localhost:8080
+```
+
+## Estructura rápida del repositorio
+
+- `portfolio/` — aplicación principal del portfolio
+- `cv-springboot/` — ejercicios y proyecto adicional
+- `spring-boot-junit-console-maven/` — pruebas y ejemplos con JUnit
+- `spring-boot-learning-mockito/` — prácticas con Mockito
+- `spring-boot-validator/` — ejemplos de validación
+
+## Notas
+
+- El archivo `.env` es local y no debe subirse al repositorio.
+- La plantilla versionada es `.env.example`.
+- Más adelante se documentará por separado la parte de API REST dentro de `portfolio/`.
+
+## Curso base
 
 [Java: Spring Boot - Guía definitiva](https://www.udemy.com/course/java-spring-boot-guia-definitiva/)

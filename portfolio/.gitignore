@@ -38,3 +38,7 @@ build/
 
 ### Agents ###
 .atl/
+
+### Environment ###
+.env
+!.env.example
